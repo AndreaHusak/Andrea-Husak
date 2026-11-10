@@ -1,20 +1,18 @@
 ---
+import '@fontsource-variable/figtree';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { isIndexable, href, absolute, STAGING_HOST_PATTERNS } from '../lib/site';
-import portrait from '../assets/andrea-husak-ramesohl.jpg';
-import { getImage } from 'astro:assets';
+import { isProduction, PRODUCTION_HOSTS, siteUrl, url } from '../site';
 
 interface Props {
   title: string;
   description: string;
-  path?: string;
   home?: boolean;
 }
-const { title, description, path = '', home = false } = Astro.props;
-const canonical = absolute(path);
-const ogImage = await getImage({ src: portrait, width: 1200, format: 'jpg' });
+
+const { title, description, home = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
 ---
 
 <!doctype html>
@@ -25,59 +23,35 @@ const ogImage = await getImage({ src: portrait, width: 1200, format: 'jpg' });
     <title>{title}</title>
     <meta name="description" content={description} />
     {
-      isIndexable ? (
+      isProduction ? (
         <>
-          <meta name="robots" content="index, follow" />
+          <meta name="robots" content="index, follow, max-image-preview:large" />
           <link rel="canonical" href={canonical} />
         </>
       ) : (
         <meta name="robots" content="noindex, nofollow" />
       )
     }
-    <!-- Sicherheitsnetz: Auf Staging-/Vorschau-Hosts wird zur Laufzeit immer noindex gesetzt -->
-    <script is:inline define:vars={{ patterns: STAGING_HOST_PATTERNS }}>
-      (function () {
-        var h = location.hostname.toLowerCase();
-        var staging = patterns.some(function (p) { return h === p || h.slice(-(p.length + 1)) === '.' + p; });
-        if (!staging) return;
+    {/* Sicherheitsnetz: wird ein Produktions-Build unter einer fremden Adresse ausgeliefert, nicht indexieren. */}
+    <script is:inline define:vars={{ hosts: PRODUCTION_HOSTS }}>
+      if (!hosts.includes(location.hostname)) {
         var m = document.querySelector('meta[name="robots"]');
-        if (!m) { m = document.createElement('meta'); m.name = 'robots'; document.head.appendChild(m); }
-        m.content = 'noindex, nofollow';
-        var c = document.querySelector('link[rel="canonical"]');
-        if (c) c.remove();
-      })();
+        if (m) m.setAttribute('content', 'noindex, nofollow');
+      }
     </script>
-    <meta name="theme-color" content="#0b4f45" />
-    <link rel="icon" href={href('favicon.svg')} type="image/svg+xml" />
-    <link rel="icon" href={href('favicon-32.png')} type="image/png" sizes="32x32" />
-    <link rel="apple-touch-icon" href={href('apple-touch-icon.png')} />
-    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#0b4e44" />
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={url('favicon-32.png')} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={url('apple-touch-icon.png')} />
     <meta property="og:locale" content="de_DE" />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(ogImage.src, Astro.site).href} />
-    {
-      home && (
-        <script
-          type="application/ld+json"
-          set:html={JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'ProfessionalService',
-            name: 'Husak-Ramesohl GmbH',
-            description,
-            url: canonical,
-            founder: { '@type': 'Person', name: 'Andrea Husak-Ramesohl', jobTitle: 'Psychologin (B.Sc.), Trainerin, Sprecherin' },
-            address: { '@type': 'PostalAddress', streetAddress: 'Am Waldrain 8', postalCode: '71120', addressLocality: 'Grafenau', addressCountry: 'DE' },
-            areaServed: 'DE',
-            knowsLanguage: ['de', 'en'],
-          })}
-        />
-      )
-    }
+    <meta property="og:image" content={new URL(url('og-image.jpg'), siteUrl).href} />
   </head>
   <body>
-    <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+    <a class="skip" href="#inhalt">Zum Inhalt springen</a>
     <Header home={home} />
     <main id="inhalt">
       <slot />

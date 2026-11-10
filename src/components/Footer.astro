@@ -1,100 +1,26 @@
 ---
-import Signet from '../assets/signet.svg?raw';
-import { href, contact } from '../lib/site';
+import Signet from './Signet.astro';
+import { contact, url } from '../site';
 const year = new Date().getFullYear();
 ---
-
 <footer class="site-footer">
-  <div class="wrap grid">
-    <div class="claim">
-      <span class="signet" set:html={Signet} />
-      <p>Beweglich im Kopf,<br />stark im Alltag.</p>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <Signet class="footer-mark" />
+      <p class="footer-claim">{contact.claim}</p>
     </div>
-    <address>
-      <strong>{contact.company}</strong><br />
-      {contact.street}<br />
-      {contact.city}
-    </address>
-    <div class="reach">
-      <a href={contact.phoneHref}>{contact.phoneDisplay}</a><br />
+    <address class="footer-address">
+      {contact.company}<br />
+      {contact.street}, {contact.city}<br />
+      <a href={contact.phoneHref}>{contact.phone}</a><br />
       <a href={`mailto:${contact.email}`}>{contact.email}</a>
+    </address>
+    <div class="footer-legal">
+      <ul>
+        <li><a href={url('impressum/')}>Impressum</a></li>
+        <li><a href={url('datenschutz/')}>Datenschutz</a></li>
+      </ul>
+      <p>© {year} {contact.company}</p>
     </div>
-  </div>
-  <div class="wrap legal">
-    <span>© {year} {contact.company}</span>
-    <nav aria-label="Rechtliches">
-      <a href={href('impressum/')}>Impressum</a>
-      <a href={href('datenschutz/')}>Datenschutz</a>
-    </nav>
   </div>
 </footer>
-
-<style>
-  .site-footer {
-    background: var(--forest-deep);
-    color: #d5e8e3;
-    padding-block: 4rem 2rem;
-    font-size: 0.97rem;
-  }
-  .grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
-    gap: 2.5rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid rgb(255 255 255 / 0.12);
-  }
-  .claim {
-    display: flex;
-    gap: 1.1rem;
-    align-items: center;
-  }
-  .claim p {
-    font-family: var(--serif);
-    font-size: 1.6rem;
-    line-height: 1.15;
-    color: #fff;
-  }
-  .signet {
-    width: 3.2rem;
-    color: #5cc7b2;
-    flex: none;
-  }
-  address {
-    font-style: normal;
-    line-height: 1.7;
-  }
-  address strong {
-    color: #fff;
-    font-weight: 600;
-  }
-  a {
-    color: #d5e8e3;
-  }
-  a:hover {
-    color: #fff;
-  }
-  .reach {
-    line-height: 1.9;
-  }
-  .legal {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding-top: 1.6rem;
-    font-size: 0.88rem;
-    color: #9cc0b8;
-  }
-  .legal nav {
-    display: flex;
-    gap: 1.5rem;
-  }
-  .legal a {
-    color: #9cc0b8;
-  }
-  @media (max-width: 760px) {
-    .grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

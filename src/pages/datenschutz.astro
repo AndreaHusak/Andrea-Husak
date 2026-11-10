@@ -1,65 +1,49 @@
 ---
-import Legal from '../layouts/Legal.astro';
-import { contact } from '../lib/site';
+import Base from '../layouts/Base.astro';
+import { contact, url } from '../site';
 ---
+<Base title="Datenschutz – Andrea Husak-Ramesohl" description="Datenschutzerklärung der Husak-Ramesohl GmbH">
+  <section class="legal">
+    <div class="wrap legal-inner">
+      <h1>Datenschutzerklärung</h1>
+      <p class="note">Platzhaltertext: Bitte vor der Veröffentlichung rechtlich prüfen und an das tatsächliche Hosting anpassen.</p>
 
-<Legal title="Datenschutz" description="Datenschutzerklärung der Husak-Ramesohl GmbH." path="datenschutz/">
-  <h2>1. Datenschutz auf einen Blick</h2>
-  <h3>Allgemeine Hinweise</h3>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-  <h3>Datenerfassung auf dieser Website</h3>
-  <p>
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-    sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
+      <h2>1. Verantwortliche Stelle</h2>
+      <p>{contact.company}<br />{contact.street}, {contact.city}<br />E-Mail: <a href={`mailto:${contact.email}`}>{contact.email}</a><br />Telefon: {contact.phone}</p>
 
-  <h2>2. Verantwortliche Stelle</h2>
-  <address>
-    {contact.company}<br />
-    {contact.street}<br />
-    {contact.city}<br />
-    Telefon: {contact.phoneDisplay}<br />
-    E-Mail: <a href={`mailto:${contact.email}`}>{contact.email}</a>
-  </address>
+      <h2>2. Allgemeine Hinweise</h2>
+      <p>Der Schutz Ihrer persönlichen Daten ist uns wichtig. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
 
-  <h2>3. Hosting</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diese Website wird bei einem externen Dienstleister gehostet
-    (Platzhalter: Anbieter und Auftragsverarbeitungsvertrag ergänzen). Sed ut perspiciatis unde omnis iste natus error
-    sit voluptatem accusantium doloremque laudantium.
-  </p>
+      <h2>3. Hosting und Server-Logfiles</h2>
+      <p>Diese Website wird bei einem externen Dienstleister gehostet [Name und Anschrift des Hosters ergänzen]. Beim Aufruf werden technisch notwendige Daten (z. B. IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browsertyp) verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.</p>
 
-  <h2>4. Server-Logfiles</h2>
-  <p>
-    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-    qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.
-  </p>
+      <h2>4. Schriftarten</h2>
+      <p>Diese Website verwendet die Schriftart „Figtree“, die lokal vom eigenen Server ausgeliefert wird. Es findet keine Verbindung zu Servern Dritter (z. B. Google Fonts) statt.</p>
 
-  <h2>5. Schriftarten</h2>
-  <p>
-    Die verwendeten Schriftarten sind lokal eingebunden. Beim Aufruf der Website wird keine Verbindung zu Servern
-    Dritter (z. B. Google Fonts) hergestellt. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  </p>
+      <h2>5. Cookies und Tracking</h2>
+      <p>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Werkzeuge. Lorem ipsum dolor sit amet – bitte bei Änderungen anpassen.</p>
 
-  <h2>6. Kontaktaufnahme per E-Mail oder Telefon</h2>
-  <p>
-    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
-    commodi consequatur. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae.
-  </p>
+      <h2>6. Kontaktaufnahme per E-Mail oder Telefon</h2>
+      <p>Wenn Sie uns per E-Mail oder Telefon kontaktieren, verarbeiten wir Ihre Angaben zur Bearbeitung der Anfrage und für den Fall von Anschlussfragen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt, ansonsten Art. 6 Abs. 1 lit. f DSGVO.</p>
 
-  <h2>7. Audio- und Videokonferenzen</h2>
-  <p>
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque
-    corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.
-  </p>
+      <h2>7. Ihre Rechte</h2>
+      <p>Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf:</p>
+      <ul>
+        <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
+        <li>Berichtigung und Löschung (Art. 16, 17 DSGVO)</li>
+        <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+        <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+        <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+        <li>Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO)</li>
+      </ul>
 
-  <h2>8. Ihre Rechte</h2>
-  <p>
-    Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates
-    repudiandae sint et molestiae non recusandae. Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit,
-    Widerspruch und Beschwerde bei einer Aufsichtsbehörde.
-  </p>
-</Legal>
+      <h2>8. Speicherdauer</h2>
+      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
+
+      <h2>9. Aktualität</h2>
+      <p>Stand: November 2026. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+
+      <a class="back" href={url('')}>Zurück zur Startseite</a>
+    </div>
+  </section>
+</Base>

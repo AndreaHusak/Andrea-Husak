@@ -1,63 +1,53 @@
 # Andrea Husak-Ramesohl – Website
 
-OnePager für die **Husak-Ramesohl GmbH**: Vorträge, Workshops und Gesundheitstage zu mentaler Stärke am Arbeitsplatz sowie Sprachaufnahmen.
+OnePager für die **Husak-Ramesohl GmbH**: Vorträge, Workshops und Gesundheitstage zu mentaler Gesundheit am Arbeitsplatz sowie professionelle Sprachaufnahmen.
 
-## Live
+**Live (Staging):** https://andreahusak.github.io/Andrea-Husak/  
+Repository: https://github.com/AndreaHusak/Andrea-Husak
 
-| Umgebung | URL | Indexierung |
-| --- | --- | --- |
-| Staging / Vorschau (GitHub Pages) | **https://andreahusak.github.io/Andrea-Husak/** | `noindex, nofollow` |
-| Produktion (später) | z. B. https://www.andreahusak.de/ | `index, follow` |
-
-Jeder Push auf `main` baut und veröffentlicht die Seite automatisch über GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)).
+Geplante Produktions-Domain: https://andreahusak.de/
 
 ## Technik
 
-- [Astro](https://astro.build) (statisch, kein JavaScript-Framework)
-- Schriften **Newsreader** (Headlines) und **Figtree** (Text), lokal gehostet über Fontsource – keine Verbindung zu Google-Servern
-- Porträt wird beim Build automatisch in AVIF/WebP und mehreren Größen ausgeliefert
-- Signet als Vektor (SVG) aus dem Original-Logo nachgezeichnet, Favicons daraus erzeugt
-
-```
-src/
-  assets/       Signet (SVG) und Porträt
-  components/   Header, Footer
-  layouts/      Base (Meta, SEO, Indexierung), Legal (Rechtsseiten)
-  lib/site.ts   Kontaktdaten + Indexierungs-Logik
-  pages/        index, impressum, datenschutz, robots.txt, sitemap.xml
-scripts/        einmalige Helfer (Logo vektorisieren, Favicons erzeugen)
-```
-
-## Lokal entwickeln
+- [Astro](https://astro.build) (statische Seite), Schrift *Figtree* lokal eingebunden (kein Google-Fonts-Abruf)
+- Deployment automatisch per GitHub Actions auf GitHub Pages bei jedem Push auf `main` ([.github/workflows/deploy.yml](.github/workflows/deploy.yml))
 
 ```bash
 npm install
-npm run dev       # http://localhost:4321
-npm run build     # Ausgabe in dist/
+npm run dev      # http://localhost:4321
+npm run build    # Ausgabe in dist/
 ```
 
-## Suchmaschinen-Indexierung (automatisch)
+## Struktur
 
-Staging wird **nicht** indexiert, die Produktions-Domain **schon** – ohne manuelles Umschalten.
+| Pfad | Inhalt |
+| --- | --- |
+| `src/pages/index.astro` | OnePager (Hero, Formate, Themen, Arbeitsweise, Qualifikation, Sprecherin, Kontakt) |
+| `src/pages/impressum.astro`, `datenschutz.astro` | Rechtsseiten (**Platzhaltertexte – vor Livegang prüfen**) |
+| `src/site.ts` | Kontaktdaten, Produktions-Domains, Indexierungslogik |
+| `src/styles/global.css` | Design-Tokens und Styles |
+| `src/assets/` | Porträt, Signet (SVG) |
 
-1. **Beim Build:** Der Workflow liest über `actions/configure-pages` die tatsächliche Pages-Adresse aus und übergibt sie als `SITE_URL`/`BASE_PATH`. [src/lib/site.ts](src/lib/site.ts) entscheidet:
-   - Host endet auf `github.io`, `pages.dev`, `netlify.app`, `vercel.app` oder ist `localhost` → `<meta name="robots" content="noindex, nofollow">`, leere Sitemap
-   - jede andere Domain → `index, follow`, Canonical-Link, `sitemap.xml`, Sitemap-Eintrag in `robots.txt`
-2. **Zur Laufzeit (Sicherheitsnetz):** Ein kleines Inline-Script setzt auf Staging-Hosts immer `noindex` und entfernt den Canonical-Link – auch wenn ein Produktions-Build versehentlich unter einer Vorschau-Adresse läuft.
+## Suchmaschinen: Staging vs. Produktion
 
-`robots.txt` sperrt auf Staging bewusst **nicht** das Crawling: Nur wenn Google die Seite abrufen darf, sieht es das `noindex` und lässt sie zuverlässig aus dem Index.
+Die Indexierung wird **automatisch** anhand der Domain gesteuert, für die gebaut wird. Es muss nichts manuell umgestellt werden.
 
-Optional lässt sich Indexierung mit der Umgebungsvariable `FORCE_NOINDEX=true` auch auf einer eigenen Domain abschalten.
+| Domain | `<meta name="robots">` | `robots.txt` | Sitemap |
+| --- | --- | --- | --- |
+| `andreahusak.github.io` (Staging), localhost, jede andere | `noindex, nofollow` | `Allow: /` (damit `noindex` gelesen wird) | leer |
+| `andreahusak.de` / `www.andreahusak.de` | `index, follow` + Canonical | `Allow: /` | alle Seiten |
 
-### Umzug auf die Produktions-Domain
+So funktioniert es:
 
-1. Im Repo unter **Settings → Pages → Custom domain** z. B. `www.andreahusak.de` eintragen.
-2. Beim Domain-Anbieter einen CNAME-Eintrag `www` → `andreahusak.github.io` setzen.
-3. Workflow einmal neu laufen lassen (Actions → „Deploy to GitHub Pages“ → *Run workflow*) oder etwas pushen.
+1. Der Workflow liest die Pages-URL über `actions/configure-pages` und übergibt sie als `SITE`/`BASE` an den Build.
+2. `src/site.ts` vergleicht den Hostnamen mit `PRODUCTION_HOSTS`. Nur dort wird die Seite indexierbar gebaut.
+3. Sicherheitsnetz: Ein kleines Inline-Script setzt `noindex`, falls ein Produktions-Build unter einer anderen Adresse ausgeliefert wird.
 
-Der nächste Build erkennt die eigene Domain automatisch und schaltet die Indexierung frei.
+**Umzug auf die Produktions-Domain:** In GitHub unter *Settings → Pages → Custom domain* `andreahusak.de` eintragen und DNS setzen. Der nächste Deploy baut automatisch die indexierbare Version. Wird die Seite woanders gehostet, beim Build `SITE=https://andreahusak.de` setzen.
 
-## Offene Punkte
+`robots.txt` sperrt auf Staging bewusst nicht das Crawling: Nur wenn Suchmaschinen die Seite abrufen dürfen, sehen sie das `noindex` und nehmen sie zuverlässig nicht in den Index auf.
 
-- **Impressum und Datenschutz enthalten Platzhaltertexte** und müssen vor dem Livegang durch rechtlich geprüfte Texte ersetzt werden.
-- Telefonnummer stammt aus dem Portfolio 2026 (+49 172 7144544); die alte Website nennt noch +49 151 236 166 93.
+## Historie
+
+- Basis übernommen von https://waltermelcher.github.io/Andrea-Husak/ (Repo `waltermelcher/Andrea-Husak`), ergänzt um die Sektion *Sprecherin* und die Telefonnummer der bisherigen Website.
+- Die erste, eigenständige Glow-up-Version ist als Git-Tag `v1-erste-version` gesichert.

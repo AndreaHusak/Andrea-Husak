@@ -1,0 +1,10 @@
+---
+import signet from '../assets/signet.svg?raw';
+interface Props { class?: string; label?: string }
+const { class: cls, label } = Astro.props;
+const svg = signet.replace(
+  '<svg ',
+  `<svg class="${cls ?? ''}" ${label ? `role="img" aria-label="${label}"` : 'aria-hidden="true"'} focusable="false" `,
+);
+---
+<Fragment set:html={svg} />

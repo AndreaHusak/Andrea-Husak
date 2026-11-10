@@ -1,59 +1,47 @@
 ---
-import Legal from '../layouts/Legal.astro';
-import { contact } from '../lib/site';
+import Base from '../layouts/Base.astro';
+import { contact, url } from '../site';
 ---
+<Base title="Impressum – Andrea Husak-Ramesohl" description="Impressum der Husak-Ramesohl GmbH">
+  <section class="legal">
+    <div class="wrap legal-inner">
+      <h1>Impressum</h1>
+      <p class="note">Platzhaltertext: Bitte vor der Veröffentlichung rechtlich prüfen und vervollständigen.</p>
 
-<Legal title="Impressum" description="Impressum der Husak-Ramesohl GmbH, Grafenau." path="impressum/">
-  <h2>Angaben gemäß § 5 DDG</h2>
-  <address>
-    {contact.company}<br />
-    {contact.street}<br />
-    {contact.city}
-  </address>
-  <p>
-    Handelsregister: HRB 794114<br />
-    Registergericht: Amtsgericht Stuttgart
-  </p>
-  <p>Vertreten durch die Geschäftsführerin: {contact.name}</p>
+      <h2>Angaben gemäß § 5 DDG</h2>
+      <p>{contact.company}<br />{contact.street}<br />{contact.city}<br />Deutschland</p>
 
-  <h2>Kontakt</h2>
-  <p>
-    Telefon: <a href={contact.phoneHref}>{contact.phoneDisplay}</a><br />
-    E-Mail: <a href={`mailto:${contact.email}`}>{contact.email}</a>
-  </p>
+      <h2>Vertreten durch</h2>
+      <p>Geschäftsführerin: {contact.name}</p>
 
-  <h2>Umsatzsteuer-ID</h2>
-  <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: {contact.vat}</p>
+      <h2>Kontakt</h2>
+      <p>Telefon: <a href={contact.phoneHref}>{contact.phone}</a><br />E-Mail: <a href={`mailto:${contact.email}`}>{contact.email}</a></p>
 
-  <h2>Verantwortlich für den Inhalt</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. {contact.name}, Anschrift wie oben. Sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua.
-  </p>
+      <h2>Registereintrag</h2>
+      <p>Eintragung im Handelsregister<br />Registergericht: {contact.court}<br />Registernummer: {contact.hrb}</p>
 
-  <h2>Verbraucherstreitbeilegung</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Wir sind nicht bereit oder verpflichtet, an
-    Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Ut enim ad minim veniam, quis nostrud
-    exercitation ullamco laboris.
-  </p>
+      <h2>Umsatzsteuer-ID</h2>
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: {contact.vat}</p>
 
-  <h2>Haftung für Inhalte</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-  </p>
+      <h2>Berufsbezeichnung</h2>
+      <p>B.Sc. Psychologie (verliehen in Deutschland), graduiertes Mitglied im Berufsverband Deutscher Psychologinnen und Psychologen (BDP). Lorem ipsum dolor sit amet, consetetur sadipscing elitr – bitte ergänzen.</p>
 
-  <h2>Haftung für Links</h2>
-  <p>
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut
-    perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
-  </p>
+      <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+      <p>{contact.name}, {contact.street}, {contact.city}</p>
 
-  <h2>Urheberrecht</h2>
-  <p>
-    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-    qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.
-  </p>
-</Legal>
+      <h2>Streitschlichtung</h2>
+      <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+      <h2>Haftung für Inhalte</h2>
+      <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+
+      <h2>Haftung für Links</h2>
+      <p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p>
+
+      <h2>Urheberrecht</h2>
+      <p>Die durch die Seitenbetreiberin erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
+
+      <a class="back" href={url('')}>Zurück zur Startseite</a>
+    </div>
+  </section>
+</Base>
