@@ -1,0 +1,880 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Signet from '../assets/signet.svg?raw';
+import portrait from '../assets/andrea-husak-ramesohl.jpg';
+import { contact } from '../lib/site';
+
+const formats = [
+  {
+    title: 'Vorträge und Keynotes',
+    duration: '30 bis 90 Minuten',
+    group: 'bis 150 Teilnehmende und mehr',
+    text: 'Ein Impuls, der das Thema setzt – mit Interaktion auch in der Großgruppe.',
+    use: 'Für Gesundheitstage, Abteilungstage und Tagungen. In Präsenz oder online.',
+  },
+  {
+    title: 'Workshops und Seminare',
+    duration: '90 Minuten bis ganztägig',
+    group: '5 bis 30 Personen',
+    text: 'Techniken erproben, Transfer planen und in Serie mit Übungsphasen verankern.',
+    use: 'Für Teams mit konkretem Anliegen und für Führungskreise.',
+  },
+  {
+    title: 'Gesundheitstage',
+    duration: 'halb- oder ganztägig',
+    group: 'Konzept aus einer Hand',
+    text: 'Impulse, Praxisstationen und Begleitmaterial für den Arbeitsplatz.',
+    use: 'Abgestimmt mit BGM, HR und werksärztlichem Dienst.',
+  },
+];
+
+const topics = [
+  'Stressbewältigung',
+  'Resilienz',
+  'Positive Psychologie',
+  'Achtsamkeit',
+  'Entspannung',
+  'Work-Life-Blending',
+  'Umgang mit Veränderungen',
+  'Gesunde Führung',
+  'Gesunde Kommunikation',
+  'Mentale Leistungsfähigkeit',
+];
+
+const reasons = [
+  {
+    title: 'Evidenz statt Esoterik.',
+    text: 'Jede Methode hat einen Wirksamkeitsnachweis: aus Arbeits- und Gesundheitspsychologie, Positiver Psychologie, ACT und weiteren Ansätzen.',
+  },
+  {
+    title: 'Didaktik, die das Gehirn mitnimmt.',
+    text: 'Dramaturgie, Wechsel von Input und Anwendung, Wiederholung in Intervallen. So werden die Inhalte erinnert und im Alltag angewendet.',
+  },
+  {
+    title: 'Passgenau für die Zielgruppe.',
+    text: 'Vom Montageband über Controlling und Sales bis zum Führungskreis: gleiches Ziel, andere Ansprache, andere Übungen.',
+  },
+  {
+    title: 'Professionell bis ins Detail.',
+    text: 'Recherche, Aufbereitung und Präsentation aus einer Hand – mit dem Handwerk aus über 25 Jahren Rundfunk und TV als Redakteurin, Moderatorin und Sprecherin, u. a. für SWR, BR und arte.',
+  },
+  {
+    title: 'Auf Deutsch und Englisch.',
+    text: 'Alle Formate auch für internationale Teams, gemischte Gruppen und Standorte im Ausland – ohne Dolmetscher, ohne Qualitätsverlust.',
+  },
+];
+
+const qualifications = [
+  'B.Sc. Psychologie, graduiertes Mitglied im BDP',
+  'Zertifizierte Trainerin für Stressbewältigung, Resilienz und Entspannungsverfahren (PMR, Autogenes Training)',
+  'PERMA-Lead© und Gesunde Führung',
+  'Über 1.000 Vorträge und Workshops',
+];
+
+const industries = ['Automobilindustrie', 'IT', 'Verwaltung', 'Baubranche', 'Bildungswesen'];
+
+const audio = ['Podcast', 'Social Media', 'Video', 'TV', 'Radio'];
+
+const steps = [
+  { title: 'Sie schildern Ihr Anliegen', text: '30 Minuten Erstgespräch zum Kennenlernen – telefonisch oder per Video.' },
+  { title: 'Ich schlage Thema und Format vor', text: 'Zugeschnitten auf Ihre Zielgruppe, Ihren Anlass und Ihren Rahmen.' },
+  { title: 'Sie erhalten ein Angebot', text: 'Auf Wunsch innerhalb von drei Werktagen.' },
+];
+
+const mailErstgespraech = `mailto:${contact.email}?subject=${encodeURIComponent('Anfrage Erstgespräch')}`;
+const mailAudio = `mailto:${contact.email}?subject=${encodeURIComponent('Anfrage Sprachaufnahme')}`;
+---
+
+<Base
+  home
+  title="Andrea Husak-Ramesohl – Mentale Stärke für Unternehmen"
+  description="Vorträge, Workshops und Gesundheitstage zu Stressbewältigung, Resilienz und gesunder Führung. Wissenschaftlich fundiert, auf Deutsch und Englisch. Husak-Ramesohl GmbH, Grafenau."
+>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="kicker">Andrea Husak-Ramesohl, B.Sc. Psychologie</p>
+        <h1>Mentale Stärke, die im Arbeitsalltag bleibt.</h1>
+        <p class="lead">
+          Vorträge, Workshops und Gesundheitstage für Unternehmen, die psychische Gesundheit als Leistungsfaktor ernst
+          nehmen.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#kontakt">Erstgespräch vereinbaren</a>
+          <a class="btn btn-ghost" href="#formate">Formate ansehen</a>
+        </div>
+        <dl class="facts">
+          <div><dt>Vorträge und Workshops</dt><dd>1.000+</dd></div>
+          <div><dt>Teilnehmende seit 2014</dt><dd>10.000+</dd></div>
+          <div><dt>Alle Formate</dt><dd>DE / EN</dd></div>
+        </dl>
+      </div>
+
+      <figure class="hero-portrait">
+        <div class="arch">
+          <Picture
+            src={portrait}
+            formats={['avif', 'webp']}
+            widths={[420, 640, 900]}
+            sizes="(max-width: 860px) 80vw, 34vw"
+            alt="Porträt von Andrea Husak-Ramesohl"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+        <figcaption class="badge">
+          <span class="badge-signet" set:html={Signet} />
+          <span>Beweglich im Kopf,<br />stark im Alltag.</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="intro section" aria-label="Ansatz">
+    <div class="wrap intro-grid">
+      <p class="statement">
+        Ihre Teams arbeiten in hohem Tempo und unter ständiger Veränderung. Ich gebe ihnen Werkzeuge, die gleich nach dem
+        Workshop funktionieren.
+      </p>
+      <p class="intro-text">
+        Wissenschaftlich fundiert, auf Ihre Zielgruppe zugeschnitten und so vermittelt, dass sie hängen bleiben.
+        Betriebliche Gesundheitsförderung, die mit der Zeit geht.
+      </p>
+    </div>
+  </section>
+
+  <!-- Formate -->
+  <section id="formate" class="section formats">
+    <div class="wrap">
+      <header class="section-head">
+        <h2>Drei Formate, ein Ziel: Wirkung im Alltag</h2>
+        <p>Vom kurzen Impuls bis zum ganzen Gesundheitstag – jeweils in Präsenz oder online.</p>
+      </header>
+      <div class="format-grid">
+        {
+          formats.map((f) => (
+            <article class="format">
+              <h3>{f.title}</h3>
+              <dl>
+                <div>
+                  <dt>Dauer</dt>
+                  <dd>{f.duration}</dd>
+                </div>
+                <div>
+                  <dt>Rahmen</dt>
+                  <dd>{f.group}</dd>
+                </div>
+              </dl>
+              <p>{f.text}</p>
+              <p class="use">{f.use}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Themen -->
+  <section id="themen" class="section topics">
+    <div class="wrap topics-grid">
+      <header class="section-head">
+        <h2>Themen</h2>
+        <p>Jedes Thema als Vortrag, Workshop oder Station eines Gesundheitstags – kombinierbar und auf Ihren Anlass abgestimmt.</p>
+      </header>
+      <ul class="topic-list">
+        {topics.map((t) => <li>{t}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Warum -->
+  <section id="arbeitsweise" class="section why">
+    <span class="why-mark" aria-hidden="true" set:html={Signet} />
+    <div class="wrap">
+      <header class="section-head">
+        <h2>Warum Unternehmen mit mir arbeiten</h2>
+      </header>
+      <ul class="reason-list">
+        {
+          reasons.map((r) => (
+            <li>
+              <h3>{r.title}</h3>
+              <p>{r.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Über mich -->
+  <section id="ueber-mich" class="section about">
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <h2>Psychologin, Trainerin und Profi vor Publikum</h2>
+        <p class="about-lead">
+          Ich verbinde psychologisches Fachwissen mit dem Handwerk aus über 25 Jahren Rundfunk und Fernsehen. Das Ergebnis
+          sind Formate, die fachlich belastbar sind und trotzdem Spaß machen.
+        </p>
+        <h3 class="list-title">Qualifikation und Erfahrung</h3>
+        <ul class="check-list">
+          {qualifications.map((q) => <li>{q}</li>)}
+        </ul>
+      </div>
+      <aside class="reference">
+        <p class="ref-label">Hauptreferenz</p>
+        <p class="ref-text">
+          Ein führender deutscher Automobilhersteller – an verschiedenen Standorten, von der Nachtschicht bis zum C-Level.
+        </p>
+        <p class="ref-label">Kunden aus</p>
+        <ul class="industry-list">
+          {industries.map((i) => <li>{i}</li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Sprecherin -->
+  <section id="sprecherin" class="section voice">
+    <div class="wrap voice-grid">
+      <div>
+        <h2>Auch am Mikrofon zu Hause</h2>
+        <p class="voice-text">
+          Professionelle Sprachaufnahmen und Audioproduktionen – mit der Erfahrung von mehr als 25 Jahren als
+          Redakteurin, Moderatorin und Sprecherin, u. a. für SWR, BR und arte.
+        </p>
+      </div>
+      <div class="voice-side">
+        <ul class="audio-list" aria-label="Einsatzbereiche">
+          {audio.map((a) => <li>{a}</li>)}
+        </ul>
+        <a class="btn btn-ghost" href={mailAudio}>Sprachaufnahme anfragen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt -->
+  <section id="kontakt" class="section contact">
+    <div class="wrap">
+      <div class="contact-card">
+        <div class="contact-intro">
+          <h2>Nächster Schritt: 30 Minuten Erstgespräch</h2>
+          <p>Lernen wir uns kennen. Sie schildern Ihr Anliegen, ich schlage ein passendes Thema und Format vor.</p>
+          <div class="contact-actions">
+            <a class="btn btn-light" href={mailErstgespraech}>E-Mail schreiben</a>
+            <a class="contact-line" href={contact.phoneHref}>{contact.phoneDisplay}</a>
+          </div>
+          <p class="contact-meta">
+            {contact.name}, {contact.company}<br />
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          </p>
+        </div>
+        <ol class="steps">
+          {
+            steps.map((s) => (
+              <li>
+                <h3>{s.title}</h3>
+                <p>{s.text}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    padding-block: clamp(2.5rem, 1rem + 5vw, 5.5rem) clamp(3.5rem, 2rem + 5vw, 6.5rem);
+    overflow: clip;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2.5rem, 1rem + 5vw, 6rem);
+    align-items: center;
+  }
+  .kicker {
+    color: var(--petrol-text);
+    font-weight: 600;
+    margin-bottom: 1.4rem;
+  }
+  h1 {
+    font-size: var(--step-4);
+    color: var(--forest);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    max-width: 15ch;
+  }
+  .lead {
+    margin-top: 1.6rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--slate);
+    max-width: 34rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2.2rem;
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    gap: 2.5rem;
+    margin: 3.2rem 0 0;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+  }
+  .facts div {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .facts dd {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: var(--step-2);
+    color: var(--forest);
+    line-height: 1.1;
+  }
+  .facts dt {
+    font-size: var(--step--1);
+    color: var(--slate);
+    margin-top: 0.3rem;
+  }
+
+  .hero-portrait {
+    position: relative;
+    margin: 0;
+    justify-self: end;
+    width: min(100%, 27rem);
+  }
+  .hero-portrait::before {
+    /* Mint-Bogen hinter dem Foto */
+    content: '';
+    position: absolute;
+    inset: 1.6rem -1.6rem -1.6rem 1.6rem;
+    border-radius: 999px 999px var(--radius) var(--radius);
+    background: var(--mint);
+    border: 1px solid var(--mint-strong);
+  }
+  .arch {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: 999px 999px var(--radius) var(--radius);
+    overflow: hidden;
+    background: var(--mint-strong);
+  }
+  .arch :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+  .badge {
+    position: absolute;
+    left: -2.2rem;
+    bottom: 2.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.9rem 1.2rem 0.9rem 0.9rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: 0 18px 40px -18px rgb(11 79 69 / 0.35);
+    font-family: var(--serif);
+    font-size: 1.08rem;
+    line-height: 1.2;
+    color: var(--forest);
+  }
+  .badge-signet {
+    width: 2.6rem;
+    color: var(--petrol);
+    flex: none;
+  }
+
+  /* Eine orchestrierte Einblendung beim Laden */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-copy > * {
+      animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    }
+    .hero-copy > :nth-child(2) {
+      animation-delay: 0.08s;
+    }
+    .hero-copy > :nth-child(3) {
+      animation-delay: 0.16s;
+    }
+    .hero-copy > :nth-child(4) {
+      animation-delay: 0.24s;
+    }
+    .hero-copy > :nth-child(5) {
+      animation-delay: 0.32s;
+    }
+    .arch {
+      animation: unveil 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s both;
+    }
+    .badge {
+      animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) 0.7s both;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+  @keyframes unveil {
+    from {
+      clip-path: inset(100% 0 0 0 round 999px 999px 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0 round 0);
+    }
+  }
+
+  /* ---------- Intro ---------- */
+  .intro {
+    background: var(--surface);
+    border-block: 1px solid var(--line);
+  }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: clamp(2rem, 1rem + 4vw, 5rem);
+    align-items: end;
+  }
+  .statement {
+    font-family: var(--serif);
+    font-size: var(--step-3);
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--forest);
+  }
+  .intro-text {
+    color: var(--slate);
+    font-size: var(--step-1);
+    line-height: 1.55;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--petrol);
+  }
+
+  /* ---------- Formate ---------- */
+  .format-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 1rem + 2vw, 3rem);
+  }
+  .format {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 1.6rem;
+    border-top: 3px solid var(--petrol);
+  }
+  .format h3 {
+    font-size: var(--step-2);
+    color: var(--forest);
+  }
+  .format dl {
+    margin: 0.4rem 0;
+    display: grid;
+    gap: 0.5rem;
+    padding: 1rem 1.2rem;
+    background: var(--mint);
+    border-radius: 10px;
+  }
+  .format dl div {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 0.75rem;
+  }
+  .format dt {
+    color: var(--slate);
+    font-size: var(--step--1);
+    padding-top: 0.12rem;
+  }
+  .format dd {
+    margin: 0;
+    font-weight: 600;
+    color: var(--forest);
+  }
+  .format .use {
+    color: var(--slate);
+    font-size: 0.97rem;
+    margin-top: auto;
+  }
+
+  /* ---------- Themen ---------- */
+  .topics {
+    background: var(--surface);
+    border-block: 1px solid var(--line);
+  }
+  .topics-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    gap: clamp(2rem, 1rem + 4vw, 5rem);
+    align-items: start;
+  }
+  .topics .section-head {
+    position: sticky;
+    top: 7rem;
+  }
+  .topic-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: none;
+  }
+  .topic-list li {
+    font-family: var(--serif);
+    font-size: var(--step-2);
+    line-height: 1.2;
+    color: var(--forest);
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .topic-list li::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--petrol);
+    flex: none;
+    transform: translateY(-0.2rem);
+  }
+  .topic-list li:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- Warum ---------- */
+  .why {
+    position: relative;
+    overflow: hidden;
+    background: var(--forest);
+    color: #e3f1ee;
+  }
+  .why-mark {
+    position: absolute;
+    right: -6rem;
+    bottom: -5rem;
+    width: clamp(20rem, 40vw, 34rem);
+    color: #fff;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .why .section-head h2 {
+    color: #fff;
+  }
+  .reason-list {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.6rem clamp(2rem, 1rem + 4vw, 5rem);
+  }
+  .reason-list li {
+    padding-top: 1.4rem;
+    border-top: 1px solid rgb(255 255 255 / 0.2);
+  }
+  .reason-list h3 {
+    font-size: var(--step-2);
+    color: #fff;
+    margin-bottom: 0.7rem;
+  }
+  .reason-list p {
+    color: #c5ded8;
+    max-width: 34rem;
+  }
+
+  /* ---------- Über mich ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 1rem + 5vw, 6rem);
+    align-items: start;
+  }
+  .about-copy h2 {
+    font-size: var(--step-3);
+    color: var(--forest);
+    max-width: 18ch;
+  }
+  .about-lead {
+    font-size: var(--step-1);
+    line-height: 1.55;
+    color: var(--slate);
+    margin-top: 1.4rem;
+    max-width: 38rem;
+  }
+  .list-title {
+    font-family: var(--sans);
+    font-size: var(--step-0);
+    font-weight: 700;
+    color: var(--forest);
+    letter-spacing: 0;
+    margin: 2.4rem 0 1rem;
+  }
+  .check-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.8rem;
+  }
+  .check-list li {
+    position: relative;
+    padding-left: 2rem;
+    max-width: 38rem;
+  }
+  .check-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3rem;
+    width: 1.15rem;
+    height: 1.15rem;
+    border-radius: 50%;
+    background: var(--mint-strong)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%230b4f45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / 70% no-repeat;
+  }
+  .reference {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(1.6rem, 1rem + 2vw, 2.4rem);
+  }
+  .ref-label {
+    font-size: var(--step--1);
+    color: var(--slate);
+    font-weight: 600;
+  }
+  .ref-text {
+    font-family: var(--serif);
+    font-size: var(--step-2);
+    line-height: 1.25;
+    color: var(--forest);
+    margin: 0.6rem 0 2rem;
+  }
+  .industry-list {
+    list-style: none;
+    margin: 0.8rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .industry-list li,
+  .audio-list li {
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: var(--mint);
+    color: var(--forest);
+    font-size: 0.93rem;
+    font-weight: 500;
+  }
+
+  /* ---------- Sprecherin ---------- */
+  .voice {
+    padding-block: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+    background: var(--mint);
+    border-block: 1px solid var(--mint-strong);
+  }
+  .voice-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(2rem, 1rem + 4vw, 5rem);
+    align-items: center;
+  }
+  .voice h2 {
+    font-size: var(--step-3);
+    color: var(--forest);
+  }
+  .voice-text {
+    margin-top: 1.2rem;
+    font-size: var(--step-1);
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 38rem;
+  }
+  .voice-side {
+    display: grid;
+    gap: 1.6rem;
+    justify-items: start;
+  }
+  .audio-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .audio-list li {
+    background: var(--surface);
+  }
+  .voice .btn-ghost {
+    border-color: var(--forest);
+  }
+  .voice .btn-ghost:hover {
+    background: var(--forest);
+    color: #fff;
+  }
+
+  /* ---------- Kontakt ---------- */
+  .contact-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 1rem + 5vw, 5rem);
+    padding: clamp(2rem, 1rem + 4vw, 4.5rem);
+    background: var(--forest);
+    color: #e3f1ee;
+    border-radius: calc(var(--radius) * 1.6);
+  }
+  .contact-intro h2 {
+    font-size: var(--step-3);
+    color: #fff;
+    max-width: 16ch;
+  }
+  .contact-intro > p:first-of-type {
+    margin-top: 1.2rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: #c5ded8;
+    max-width: 30rem;
+  }
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.6rem;
+    margin-top: 2rem;
+  }
+  .contact-line {
+    color: #fff;
+    font-weight: 600;
+    font-size: var(--step-1);
+    text-decoration-color: rgb(255 255 255 / 0.4);
+  }
+  .contact-line:hover {
+    color: #fff;
+    text-decoration-color: #fff;
+  }
+  .contact-meta {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: #9cc0b8;
+  }
+  .contact-meta a {
+    color: #c5ded8;
+  }
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    align-content: center;
+  }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 0 0 1.8rem 3.6rem;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: -0.1rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: #fff;
+  }
+  .steps li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 1.2rem;
+    top: 2.6rem;
+    bottom: 0.3rem;
+    width: 1px;
+    background: rgb(255 255 255 / 0.2);
+  }
+  .steps h3 {
+    font-family: var(--sans);
+    font-size: var(--step-0);
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #fff;
+    line-height: 1.4;
+  }
+  .steps p {
+    color: #c5ded8;
+    margin-top: 0.3rem;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 960px) {
+    .format-grid {
+      grid-template-columns: 1fr;
+      max-width: 40rem;
+    }
+    .topics-grid,
+    .about-grid,
+    .voice-grid,
+    .contact-card,
+    .intro-grid {
+      grid-template-columns: 1fr;
+    }
+    .topics .section-head {
+      position: static;
+    }
+  }
+  @media (max-width: 860px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-portrait {
+      justify-self: center;
+      width: min(82%, 24rem);
+      margin-right: 1.6rem;
+    }
+    .badge {
+      left: -1rem;
+    }
+    .reason-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .facts {
+      grid-template-columns: repeat(2, auto);
+      gap: 1.4rem 2rem;
+    }
+    .actions .btn {
+      flex: 1 1 100%;
+      justify-content: center;
+    }
+    .badge {
+      font-size: 0.95rem;
+    }
+  }
+</style>
